@@ -2,7 +2,7 @@
 using HarmonyLib;
 using System.Reflection;
 
-[assembly: MelonInfo(typeof(ListPB.Core), "ListPB", "1.0.0", "joeyexists", null)]
+[assembly: MelonInfo(typeof(ListPB.Core), "ListPB", "1.0.1", "joeyexists", null)]
 [assembly: MelonGame("Little Flag Software, LLC", "Neon White")]
 
 namespace ListPB
@@ -36,7 +36,9 @@ namespace ListPB
             if (levelStats != null && levelStats.GetCompleted())
             {
                 string bestTime = Game.GetTimerFormatted(levelStats.GetTimeBestMicroseconds());
-                __instance._textLevelName_Localized.textMeshProUGUI.text += $" » {bestTime}";
+
+                string text = __instance._textLevelName_Localized.textMeshProUGUI.text;
+                __instance._textLevelName_Localized.textMeshProUGUI.text += $" <color=#636363><size=90%>{bestTime}";
             }
         }
     }
