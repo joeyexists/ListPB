@@ -4,7 +4,7 @@ using HarmonyLib;
 using System.Text;
 using Color = UnityEngine.Color;
 
-[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.1.0", "joeyexists", null)]
+[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.1.1", "joeyexists", null)]
 [assembly: MelonGame("Little Flag Software, LLC", "Neon White")]
 
 namespace ListPB
@@ -100,15 +100,15 @@ namespace ListPB
 
         private static readonly (Color start, Color end)[] MedalGradients =
         [
-            (new Color32(0xA5, 0x65, 0x29, 255), new Color32(0xCD, 0x7F, 0x32, 255)), // bronze
-            (new Color32(0x9E, 0x9E, 0x9E, 255), new Color32(0xD3, 0xD3, 0xD3, 255)), // silver
-            (new Color32(0xDB, 0xB6, 0x00, 255), new Color32(0xF2, 0xC1, 0x00, 255)), // gold
-            (new Color32(0x7F, 0xC9, 0xFF, 255), new Color32(0x7F, 0xE1, 0xFF, 255)), // ace
-            (new Color32(0xCC, 0x10, 0x25, 255), new Color32(0xFD, 0x44, 0x65, 255)), // dev
-            (new Color32(0x00, 0xD3, 0x74, 255), new Color32(0x72, 0xE5, 0xAE, 255)), // emerald
-            (new Color32(0xB2, 0x00, 0xFF, 255), new Color32(0xD6, 0x7F, 0xFF, 255)), // amethyst
-            (new Color32(0x00, 0x80, 0xFF, 255), new Color32(0x00, 0x26, 0xFF, 255)), // sapphire
-            (new Color32(0xFF, 0xD8, 0x00, 255), new Color32(0xFF, 0x6A, 0x00, 255)), // topaz
+            (new Color32(209, 113, 0, 255), new Color32(160, 80, 29, 255)), // bronze
+            (new Color32(207, 209, 199, 255), new Color32(164, 172, 146, 255)), // silver
+            (new Color32(242, 193, 0, 255), new Color32(224, 183, 0, 255)), // gold
+            (new Color32(166, 231, 224, 255), new Color32(84, 205, 199, 255)), // ace
+            (new Color32(241, 103, 129, 255), new Color32(241, 0, 12, 255)), // dev
+            (new Color32(114, 229, 174, 255), new Color32(0, 224, 104, 255)), // emerald
+            (new Color32(213, 136, 248, 255), new Color32(185, 76, 244, 255)), // amethyst
+            (new Color32(0, 128, 255, 255), new Color32(0, 38, 255, 255)), // sapphire
+            (new Color32(255, 216, 0, 255), new Color32(255, 106, 0, 255)), // topaz
         ];
     }
 }
