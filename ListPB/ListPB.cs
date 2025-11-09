@@ -4,7 +4,7 @@ using HarmonyLib;
 using System.Text;
 using Color = UnityEngine.Color;
 
-[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.2.1", "joeyexists", null)]
+[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.2.2", "joeyexists", null)]
 [assembly: MelonGame("Little Flag Software, LLC", "Neon White")]
 
 namespace ListPB
@@ -16,7 +16,7 @@ namespace ListPB
 
         public override void OnLateInitializeMelon()
         {
-            Harmony = new HarmonyLib.Harmony($"{Info.Author}.{Info.Name}");
+            Harmony = new HarmonyLib.Harmony($"joeyexists.ListPB");
             Settings.Initialize(this);
             PatchMenu();
         }
@@ -37,19 +37,14 @@ namespace ListPB
                 var bestMicro = levelStats.GetTimeBestMicroseconds();
                 string timer = Game.GetTimerFormatted(bestMicro);
 
-                var separator = Settings.SeparatorEntry.Value;
-                var color = Settings.ColorEntry.Value;
-                var size = Settings.SizeEntry.Value;
-                var isTinted = Settings.TintedEntry.Value;
-
                 var sb = new StringBuilder();
                 
-                if (!string.IsNullOrWhiteSpace(separator))
-                    sb.Append(separator[0]).Append(' ');
+                if (!string.IsNullOrWhiteSpace(Settings.SeparatorEntry.Value))
+                    sb.Append(Settings.SeparatorEntry.Value[0]).Append(' ');
 
-                sb.Append($"<size={size}%>");
+                sb.Append($"<size={Settings.SizeEntry.Value}%>");
 
-                if (isTinted)
+                if (Settings.ColorMedalEntry.Value)
                 {
                     var tintedTime = CreateTintedTimeString(timer, ld.levelID, bestMicro);
                     if (!string.IsNullOrEmpty(tintedTime)) sb.Append(tintedTime);
@@ -57,7 +52,7 @@ namespace ListPB
                 }
                 else
                 {
-                    sb.Append($"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{timer}</color>");
+                    sb.Append($"<color=#{ColorUtility.ToHtmlStringRGB(Settings.ColorEntry.Value)}>{timer}</color>");
                 }
                     
                 sb.Append("</size>");
@@ -76,7 +71,8 @@ namespace ListPB
 
             // thanks neonlite 🙂
             var medalIndex = NeonLite.Modules.CommunityMedals.GetMedalIndex(levelId, timeMicro);
-            medalIndex = Mathf.Clamp(medalIndex, 0, 8);
+            bool isCommunityMedalsEnabled = NeonLite.Modules.CommunityMedals.setting.Value;
+            medalIndex = Mathf.Clamp(medalIndex, 0, isCommunityMedalsEnabled ? 8 : 4);
 
             (Color startCol, Color endCol) = medalIndex switch
             {
