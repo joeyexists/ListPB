@@ -28,7 +28,8 @@ namespace ListPB
         public static MelonPreferences_Entry<Color32> SapphireEndColEntry { get; private set; }
         public static MelonPreferences_Entry<Color32> TopazStartColEntry { get; private set; }
         public static MelonPreferences_Entry<Color32> TopazEndColEntry { get; private set; }
-        public static MelonPreferences_Entry<bool> AllowHueShiftEntry { get; private set; }
+
+        public static MelonPreferences_Entry<bool> ApplyHueShiftEntry { get; private set; }
 
         public static void Initialize(ListPB modInstance)
         {
@@ -77,7 +78,7 @@ namespace ListPB
             TopazEndColEntry = category.CreateEntry("Topaz Gradient End Color",
                 new Color32(255, 106, 0, 255), is_hidden: true);
 
-            AllowHueShiftEntry = category.CreateEntry("Allow Hue Shift", true, is_hidden: true,
+            ApplyHueShiftEntry = category.CreateEntry("Apply Hue Shift", true, is_hidden: true,
                 description: "If enabled, hue shift from NeonLite/Medals will apply to the text.");
         }
     }

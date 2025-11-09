@@ -4,7 +4,7 @@ using HarmonyLib;
 using System.Text;
 using Color = UnityEngine.Color;
 
-[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.2.0", "joeyexists", null)]
+[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.2.1", "joeyexists", null)]
 [assembly: MelonGame("Little Flag Software, LLC", "Neon White")]
 
 namespace ListPB
@@ -92,7 +92,7 @@ namespace ListPB
                 _ => (Settings.BronzeStartColEntry.Value, Settings.BronzeEndColEntry.Value)
             };
 
-            if (Settings.AllowHueShiftEntry.Value)
+            if (Settings.ApplyHueShiftEntry.Value)
             {
                 startCol = NeonLite.Modules.CommunityMedals.AdjustedColor(startCol);
                 endCol = NeonLite.Modules.CommunityMedals.AdjustedColor(endCol);
