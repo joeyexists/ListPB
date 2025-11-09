@@ -4,7 +4,7 @@ using HarmonyLib;
 using System.Text;
 using Color = UnityEngine.Color;
 
-[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.1.1", "joeyexists", null)]
+[assembly: MelonInfo(typeof(ListPB.ListPB), "ListPB", "1.2.0", "joeyexists", null)]
 [assembly: MelonGame("Little Flag Software, LLC", "Neon White")]
 
 namespace ListPB
@@ -76,12 +76,27 @@ namespace ListPB
 
             // thanks neonlite 🙂
             var medalIndex = NeonLite.Modules.CommunityMedals.GetMedalIndex(levelId, timeMicro);
-            medalIndex = Mathf.Clamp(medalIndex, 0, MedalGradients.Length - 1);
+            medalIndex = Mathf.Clamp(medalIndex, 0, 8);
 
-            var (startCol, endCol) = MedalGradients[medalIndex];
+            (Color startCol, Color endCol) = medalIndex switch
+            {
+                0 => (Settings.BronzeStartColEntry.Value, Settings.BronzeEndColEntry.Value),
+                1 => (Settings.SilverStartColEntry.Value, Settings.SilverEndColEntry.Value),
+                2 => (Settings.GoldStartColEntry.Value, Settings.GoldEndColEntry.Value),
+                3 => (Settings.AceStartColEntry.Value, Settings.AceEndColEntry.Value),
+                4 => (Settings.DevStartColEntry.Value, Settings.DevEndColEntry.Value),
+                5 => (Settings.EmeraldStartColEntry.Value, Settings.EmeraldEndColEntry.Value),
+                6 => (Settings.AmethystStartColEntry.Value, Settings.AmethystEndColEntry.Value),
+                7 => (Settings.SapphireStartColEntry.Value, Settings.SapphireEndColEntry.Value),
+                8 => (Settings.TopazStartColEntry.Value, Settings.TopazEndColEntry.Value),
+                _ => (Settings.BronzeStartColEntry.Value, Settings.BronzeEndColEntry.Value)
+            };
 
-            startCol = NeonLite.Modules.CommunityMedals.AdjustedColor(startCol);
-            endCol = NeonLite.Modules.CommunityMedals.AdjustedColor(endCol);
+            if (Settings.AllowHueShiftEntry.Value)
+            {
+                startCol = NeonLite.Modules.CommunityMedals.AdjustedColor(startCol);
+                endCol = NeonLite.Modules.CommunityMedals.AdjustedColor(endCol);
+            }
 
             var len = timer.Length;
             StringBuilder sb = new(len * 23 + len);
@@ -97,18 +112,5 @@ namespace ListPB
 
             return sb.ToString();
         }
-
-        private static readonly (Color start, Color end)[] MedalGradients =
-        [
-            (new Color32(209, 113, 0, 255), new Color32(160, 80, 29, 255)), // bronze
-            (new Color32(207, 209, 199, 255), new Color32(164, 172, 146, 255)), // silver
-            (new Color32(242, 193, 0, 255), new Color32(224, 183, 0, 255)), // gold
-            (new Color32(166, 231, 224, 255), new Color32(84, 205, 199, 255)), // ace
-            (new Color32(241, 103, 129, 255), new Color32(241, 0, 12, 255)), // dev
-            (new Color32(114, 229, 174, 255), new Color32(0, 224, 104, 255)), // emerald
-            (new Color32(213, 136, 248, 255), new Color32(185, 76, 244, 255)), // amethyst
-            (new Color32(0, 128, 255, 255), new Color32(0, 38, 255, 255)), // sapphire
-            (new Color32(255, 216, 0, 255), new Color32(255, 106, 0, 255)), // topaz
-        ];
     }
 }
