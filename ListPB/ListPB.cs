@@ -88,7 +88,7 @@ namespace ListPB
                 _ => (Settings.BronzeStartColEntry.Value, Settings.BronzeEndColEntry.Value)
             };
 
-            if (Settings.ApplyHueShiftEntry.Value)
+            if (Settings.ApplyHueShiftEntry.Value && isCommunityMedalsEnabled)
             {
                 startCol = NeonLite.Modules.CommunityMedals.AdjustedColor(startCol);
                 endCol = NeonLite.Modules.CommunityMedals.AdjustedColor(endCol);
